@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Produto } from '../shared/produto';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-produto-form',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./produto-form.component.css']
 })
 export class ProdutoFormComponent implements OnInit {
+  produto: Produto;
+  title: string = '';
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit() {
+    this.title = 'Novo Produto';
+    this.produto = new Produto();
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+  }
+
+  onSubmit(){
+    console.log(this.produto);
+    this.router.navigate(['/produtos']);
   }
 
 }
