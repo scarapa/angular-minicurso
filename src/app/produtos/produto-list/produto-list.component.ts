@@ -23,4 +23,13 @@ export class ProdutoListComponent implements OnInit {
     });
   }
 
+  remove(produto: Produto){
+    this.produtoService.remove(produto.id).subscribe(() => {
+      // PODE BUSCAR TODOS NOVAMENTE 
+      //this.getAll();
+      //OU FAZER FILTRO TRAZENDO TODOS OS PRODUTOS COM EXECESSAO DO PRODUTO REMOVIDO
+      this.produtos = this.produtos.filter(p=> p!== produto);
+    });
+  }
+
 }
