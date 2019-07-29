@@ -1,0 +1,9 @@
+input.pesquisar{
+    border:0px solid transparent ;
+    background:transparent;
+    color:white
+}
+
+input.pesquisar::placeholder{
+    font-weight: bold;
+}

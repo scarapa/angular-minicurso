@@ -8,6 +8,7 @@ import { Produto } from './produto';
 export class ProdutoService {
   private URL = 'api/produtos';
   constructor(private http: HttpClient) { }
+  private listagem:any = [];
 
   getAll(){
     return this.http.get<Produto[]>(this.URL);

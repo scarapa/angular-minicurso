@@ -1,7 +1,13 @@
 <div class="card">
     <div class="card-header bg-primary text-light">
+      <span [hidden]="pesquisaFlag" class="col-lg-4">
         {{ title }}
+      </span>
+      <input type="text" name="pesquisaNome" class="pesquisar col-lg-4" placeholder="Pesquisar Produtos" (input)="pesquisarBanca($event)" [hidden]="!pesquisaFlag"/>      
+      <i class="fas fa-search right" (click)="habilitarPesquisa()" ></i>
     </div>
+
+
     <div class="card-body">
         <table class="table table-hover">
             <thead>
@@ -15,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let produto of produtos">
+              <tr *ngFor="let produto of produtos ">
                   <th scope="row">{{ produto.id }}</th>
                   <td>{{ produto.nome }}</td>
                   <td>{{ produto.descricao }}</td>

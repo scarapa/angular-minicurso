@@ -10,6 +10,9 @@ import {Produto} from '../shared/produto';
 export class ProdutoListComponent implements OnInit {
   title: string = 'Produtos';
   produtos: Produto[];
+  listagem = [];
+  pesquisaFlag = true;
+  pesquisa: string = '';
 
   constructor(private produtoService: ProdutoService) { }
 
@@ -30,6 +33,29 @@ export class ProdutoListComponent implements OnInit {
       //OU FAZER FILTRO TRAZENDO TODOS OS PRODUTOS COM EXECESSAO DO PRODUTO REMOVIDO
       this.produtos = this.produtos.filter(p=> p!== produto);
     });
+  }
+
+  pesquisarBanca(Event){
+    this.produtoService.getAll().subscribe(resp => {
+      let texto:string = (<HTMLInputElement>Event.target).value
+
+      function pesquisar(objeto){
+        objeto.nome = objeto.nome.toString();
+        if(objeto.nome.toLowerCase().indexOf(texto.toLowerCase()) !== -1) { 
+          return true;
+        }
+      }
+      
+      this.produtos = resp.filter(pesquisar);
+    });
+  }    
+
+  habilitarPesquisa(){
+    if(this.pesquisaFlag){
+      this.pesquisaFlag = false;
+    }else{
+      this.pesquisaFlag = true;
+    }
   }
 
 }
